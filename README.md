@@ -1,11 +1,21 @@
+### Table of contents;
+- [ Steps followed ](#steps)
+- [ Solution design ](#design)
+- [ Running the solution ](#run)
+- [ Querying through API ](#query)
+- [ Stopping the docker container ](#stop)
+
+
+<a name="steps"></a>
 ### Steps followed:
 
  - Downloaded the data files from https://data.police.uk/data/ for the desired date ranges and saved it to data directory
  - Parsed and extracted fields from CSV using Apache Spark
- - Joined the datasets and saved the result in MongoDB
+ - Joined the datasets and saved the final structured result in MongoDB
  - Launched a flask web application to serve user requests
  - Created own docker image and hosted it in docker hub for easy distribution
 
+<a name="design"></a>
 ### Solution design:
 ![Image](images/Design.jpg)
 
@@ -25,6 +35,7 @@
  - It is a flask application which takes the crime id from user and gets the corresponding details from mongo db.
 
 
+<a name="run"></a>
 ### Running the solution:
 
  - Download the Dockerfile and docker-compose.yml from https://github.com/amitrmishra/TRG
@@ -38,7 +49,8 @@ Output:
 Creating trg_full_solution_1 ... done
 ```
 
-Query the API
+<a name="query"></a>
+### Querying through API
 
 `amitranjan$ curl http://localhost:5000/98096d1a69205691a56b89c1182eadd6aaf15400ea18da134e0023f20aba5cdb`
 
@@ -65,7 +77,8 @@ Output:
 
 ![Image](images/API%20Call.png)
 
-### Stop the docker container
+<a name="stop"></a>
+### Stopping the docker container
 `amitranjan$ docker-compose -f docker-compose.yml down`
 
 Output:

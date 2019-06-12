@@ -4,6 +4,7 @@
 - [ Running the solution ](#run)
 - [ Querying through API ](#query)
 - [ Stopping the docker container ](#stop)
+- [ Additional information ](#additional)
 
 
 <a name="steps"></a>
@@ -87,3 +88,48 @@ Stopping trg_full_solution_1 ... done
 Removing trg_full_solution_1 ... done
 Removing network trg_default
 ```
+
+<a name="additional"></a>
+### Additional information
+
+1. Building spark application:
+  - Checkout project: https://github.com/amitrmishra/TRG/tree/master/dataprocessing
+  - In the project home directory, run: `sbt clean assembly` to build the fat jar
+
+2. Installing and configuring mongodb:
+  - Create a `/etc/yum.repos.d/mongodb-org-4.0.repo` file with below content
+  ```
+  [mongodb-org-4.0]
+  name=MongoDB Repository
+  baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
+  gpgcheck=1
+  enabled=1
+  gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+  ```
+  - Install mongodb: `yum install -y mongodb-org`
+  - Create directories on local: `mkdir -p /data/db /var/log`
+  - Launch mongodb: `mongod --fork --logpath /var/log/mongod.log`
+  - Adding a user using mongo shell
+  `mongo`
+  ```
+  use admin
+  db.createUser(
+    {
+      user: "root",
+      pwd: "example",
+      roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+    }
+  )
+  ```
+
+3. Running flask web application
+  - Install dependencies
+  ```
+   pip install pymongo
+   pip install Flask
+  ```
+  - Run the application
+  ```
+  export FLASK_APP=webapp.py
+  flask run --host=0.0.0.0
+  ```

@@ -1,3 +1,11 @@
+### Steps followed:
+
+ - Downloaded the data files from https://data.police.uk/data/ for the desired date ranges and saved it to data directory
+ - Parsed and extracted fields from CSV using Apache Spark
+ - Joined the datasets and saved the result in MongoDB
+ - Launched a flask web application to serve user requests
+ - Created own docker image and hosted it in docker hub for easy distribution
+
 ### Solution design:
 ![Image](images/Design.jpg)
 

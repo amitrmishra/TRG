@@ -1,0 +1,8 @@
+# .idea files
+.idea
+
+# Store files
+.DS_Store
+
+# Project related images
+images
